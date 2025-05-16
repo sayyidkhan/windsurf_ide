@@ -22,7 +22,7 @@ def split_file(filename, parts):
     print(f"Split into {parts} parts.")
 
 if __name__ == "__main__":
-    url = "https://example.com/path/to/file.zip"  # <- Replace this
+    url = "https://windsurf-stable.codeium.com/api/update/win32-x64-user/stable/latest"  # <- Replace this
     filename = "downloaded_file.zip"
     download_file(url, filename)
     split_file(filename, 10)
