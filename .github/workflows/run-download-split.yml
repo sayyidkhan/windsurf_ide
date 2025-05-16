@@ -1,0 +1,30 @@
+name: Download and Split File
+
+on:
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    - cron: '0 0 1 * *'  # Runs at 00:00 UTC on the 1st of every month
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Requests
+        run: pip install requests
+
+      - name: Run Script
+        run: python download_and_split.py
+
+      - name: Upload Parts as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: file-parts
+          path: downloaded_file.zip.part*
