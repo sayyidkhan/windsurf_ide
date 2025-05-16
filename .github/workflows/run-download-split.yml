@@ -28,7 +28,7 @@ jobs:
         run: python download_and_split.py
 
       - name: Upload Parts as Artifact
-        uses: actions/upload-artifact@v3.0.1
+        uses: actions/upload-artifact@v3
         with:
           name: file-parts
           path: downloaded_file.zip.part*
