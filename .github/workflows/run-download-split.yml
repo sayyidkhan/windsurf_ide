@@ -1,9 +1,13 @@
 name: Download and Split File
 
+permissions:
+  contents: read
+  actions: write
+
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 1 * *'  # Runs at 00:00 UTC on the 1st of every month
+    - cron: '0 0 1 * *'
 
 jobs:
   run-script:
@@ -24,7 +28,7 @@ jobs:
         run: python download_and_split.py
 
       - name: Upload Parts as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.0.1
         with:
           name: file-parts
           path: downloaded_file.zip.part*
