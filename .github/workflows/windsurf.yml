@@ -1,0 +1,17 @@
+name: Download Windsurf
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Windsurf Installer
+        run: |
+          curl -L -o WindsurfUserSetup-x64-1.9.0.exe \
+          https://windsurf-stable.codeiumdata.com/win32-x64-user/stable/fbebfca390b10f7a152fd231f94606109d576e12/WindsurfUserSetup-x64-1.9.0.exe
+
+      - name: Show file info
+        run: ls -lh WindsurfUserSetup-x64-1.9.0.exe
