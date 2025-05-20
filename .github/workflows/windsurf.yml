@@ -1,4 +1,4 @@
-name: Download Windsurf
+name: Download File
 
 on:
   workflow_dispatch:
@@ -15,3 +15,9 @@ jobs:
 
       - name: Show file info
         run: ls -lh WindsurfUserSetup-x64-1.9.0.exe
+
+      - name: Upload Windsurf Installer as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windsurf-installer
+          path: WindsurfUserSetup-x64-1.9.0.exe
