@@ -1,4 +1,4 @@
-name: Download File
+name: Download and Release File
 
 on:
   workflow_dispatch:
@@ -13,11 +13,9 @@ jobs:
           curl -L -o WindsurfUserSetup-x64-1.9.0.exe \
           https://windsurf-stable.codeiumdata.com/win32-x64-user/stable/fbebfca390b10f7a152fd231f94606109d576e12/WindsurfUserSetup-x64-1.9.0.exe
 
-      - name: Show file info
-        run: ls -lh WindsurfUserSetup-x64-1.9.0.exe
-
-      - name: Upload Windsurf Installer as Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: windsurf-installer
-          path: WindsurfUserSetup-x64-1.9.0.exe
+          files: WindsurfUserSetup-x64-1.9.0.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
