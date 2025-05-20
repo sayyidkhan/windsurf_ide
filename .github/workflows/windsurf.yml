@@ -4,22 +4,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  download:
+  release:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set tag name
         id: tag
-        run: |
-          echo "TAG_NAME=v1.0.0" >> $GITHUB_ENV
+        run: echo "TAG_NAME=v1.0.0" >> $GITHUB_ENV
 
-      - name: Create Git tag
+      - name: Configure Git
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+
+      - name: Create and push Git tag
+        run: |
           git tag $TAG_NAME
           git push origin $TAG_NAME
 
