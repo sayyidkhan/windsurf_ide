@@ -1,4 +1,4 @@
-name: Download and Release File
+name: Download Windsurf Release File
 
 on:
   workflow_dispatch:
