@@ -44,13 +44,13 @@ jobs:
 
       - name: Download Windsurf Installer
         run: |
-          curl -L -o WindsurfUserSetup-x64-latest.exe \
-          https://windsurf-stable.codeium.com/api/update/win32-x64-user/stable/latest
+          curl -L -o WindsurfUserSetup-x64-1.10.7.exe \
+          https://windsurf-stable.codeiumdata.com/win32-x64-user/stable/7c493d782a6cad0516e79f070d953687991df4ec/WindsurfUserSetup-x64-1.10.7.exe
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.TAG_NAME }}
-          files: WindsurfUserSetup-x64-latest.exe
+          files: WindsurfUserSetup-x64-1.10.7.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
