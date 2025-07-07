@@ -1,4 +1,4 @@
-name: Download and Release File
+name: Windsurf IDE
 
 on:
   workflow_dispatch:
@@ -13,9 +13,24 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set tag name
-        id: tag
-        run: echo "TAG_NAME=v1.0.0" >> $GITHUB_ENV
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Get latest tag and set next tag
+        id: version
+        run: |
+          # Get the latest tag matching v1.*
+          latest_tag=$(git tag --list "v1.*" --sort=-v:refname | head -n 1)
+          if [ -z "$latest_tag" ]; then
+            next_tag="v1.0.0"
+          else
+            # Extract the version numbers
+            IFS='.' read -r major minor patch <<<"${latest_tag#v}"
+            patch=$((patch + 1))
+            next_tag="v${major}.${minor}.${patch}"
+          fi
+          echo "Next tag: $next_tag"
+          echo "TAG_NAME=$next_tag" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
